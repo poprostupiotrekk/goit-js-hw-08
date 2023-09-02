@@ -1,15 +1,11 @@
 import throttle from 'lodash.throttle';
 
-const fbackForm = document.querySelector('feedback-form');
+const fbackForm = document.querySelector('.feedback-form');
 const STORAGE_KEY = 'feedback-form-state';
-
-fbackForm.addEventListener('input', throttle(onDataInput, 500));
-fbackForm.addEventListener('submit', onFormSubmit);
 
 let dataForm = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
 const { email, message } = fbackForm.elements;
-pageReload();
 
 const pageReload = () => {
   if (dataForm) {
@@ -37,3 +33,8 @@ const onFormSubmit = e => {
   e.currentTarget.reset();
   dataForm = {};
 };
+
+fbackForm.addEventListener('input', throttle(onDataInput, 500));
+fbackForm.addEventListener('submit', onFormSubmit);
+
+pageReload();
